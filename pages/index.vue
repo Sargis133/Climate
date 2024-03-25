@@ -24,11 +24,11 @@
             <p>{{ mainData.climateData.temp }}</p>
           </div>
           <div class="climate-info__box">
-            <p>Min -</p>
+            <p>Min - </p>
             <p>{{ mainData.climateData.tempMin }}</p>
           </div>
           <div class="climate-info__box">
-            <p>Max -</p>
+            <p>Max - </p>
             <p>{{ mainData.climateData.tempMax }}</p>
           </div>
           <div class="climate-info__box">
@@ -169,10 +169,23 @@ watch(climateData, (newData) => {
 .main__bottom-content {
   background-color: #BFBFBF;
   padding: 10px 20px;
+  border-radius: 0 0 20px 20px;
 }
 .bottom-content__full-day-climate {
   display: flex;
   column-gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+.bottom-content__full-day-climate::-webkit-scrollbar {
+  height: 5px;
+}
+.bottom-content__full-day-climate::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 8px;
+}
+.bottom-content__full-day-climate::-webkit-scrollbar-track {
+  border-radius: 8px;
 }
 .day-climate-box__day-climate-descriptions {
   display: grid;
@@ -180,5 +193,18 @@ watch(climateData, (newData) => {
 }
 .day-climate-descriptions__title {
   white-space: pre;
+}
+.day-climate-box__day-icon-box {
+  display: flex;
+  justify-content: center;
+}
+.day-icon-box__icon {
+  width: 50px;
+}
+.full-day-climate__day-climate-box {
+  border: 1px solid lightcyan;
+  padding: 8px;
+  background-color: darkgray;
+  border-radius: 8px;
 }
 </style>

@@ -12,7 +12,6 @@ export const getClimateData = async () => {
     )
       .then((response) => response.json())
       .then((data: any) => {
-          console.log(data)
           climateData.fullDayClimate = fullDayClimate(data.list)
           climateData.wind = data.list[0].wind.speed;
           climateData.conditions = data.list[0].weather[0].main.toLowerCase();

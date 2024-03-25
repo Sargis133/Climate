@@ -16,6 +16,9 @@
           <p class="country-info-box__time">
             {{ mainData.timeData.time }}
           </p>
+          <p class="country-info-box__date">
+            {{ mainData.timeData.date }}
+          </p>
         </div>
         <div class="climate-info-box__climate-info">
           <p class="climate-info__title">For 3 hour</p>
@@ -79,6 +82,9 @@
 import { getTime } from "~/components/templates/index/utils/getTime";
 import { sunRiseFunc } from "~/components/templates/index/utils/sunRise";
 import { onUpdateClimateApi } from "~/components/templates/index/utils/onUpdateClimateApi";
+import type {I_ClimateData} from "~/models/store/climate/interfaces";
+import {getFirstDate} from "~/components/templates/index/utils/getDate";
+import type {I_MainData} from "~/models/pages/index/interfaces";
 
 const { $store } = useNuxtApp();
 
@@ -93,11 +99,12 @@ function getTimeNow() {
     if (onUpdateClimateApi()) $store.dispatch("A_SET_CLIMATE_CONFIG");
   }, 60000);
 }
-const sunTimes = (sec: number) => sunRiseFunc(sec);
+const sunTimes = (sec: string) => sunRiseFunc(sec);
 
-const mainData = ref({
+const mainData = ref<I_MainData>({
   timeData: {
     time: getTime(),
+    date: getFirstDate(),
   },
   climateData: {
     country: "Country",
@@ -112,11 +119,11 @@ const mainData = ref({
   },
 });
 
-const climateData = computed(() => $store.getters.getClimateData);
+const climateData = computed<I_ClimateData>(() => $store.getters.getClimateData);
 watch(climateData, (newData) => {
-  newData.sunInput = sunTimes(newData.sunInput);
-  newData.sunOutput = sunTimes(newData.sunOutput);
-  mainData.value.climateData = newData;
+    newData.sunInput = sunTimes(newData.sunInput);
+    newData.sunOutput = sunTimes(newData.sunOutput);
+    mainData.value.climateData = newData;
 });
 </script>
 

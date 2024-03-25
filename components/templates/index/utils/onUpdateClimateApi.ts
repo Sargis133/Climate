@@ -1,6 +1,6 @@
-export const onUpdateClimateApi = () => {
-  let date = new Date();
-  let times = [
+export const onUpdateClimateApi = (): boolean => {
+  let date: Date = new Date();
+  let times: string[] = [
     "03:10",
     "06:10",
     "09:10",
@@ -11,11 +11,12 @@ export const onUpdateClimateApi = () => {
     "21:10",
     "00:10",
   ];
-  let firstTime =
+  let firstTime: string =
       (date.getHours() < 10
       ? "0" + date.getHours()
       : date.getHours()) + ":" + (date.getMinutes() < 10
         ? "0" + date.getMinutes()
         : date.getMinutes());
-  if(times.includes(firstTime)) return true
+  return times.includes(firstTime)
+
 };
